@@ -18,7 +18,6 @@ We then fed these prompts to ChatGPT-4 to create corresponding paragraphs.
 
 
 
-
 --- Structure ---
 
 The entire dataset consists of the following parts:
