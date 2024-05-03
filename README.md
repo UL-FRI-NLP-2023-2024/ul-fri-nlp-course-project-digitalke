@@ -20,8 +20,4 @@ We then fed these prompts to ChatGPT-4 to create corresponding paragraphs.
 
 --- Structure ---
 
-The entire dataset consists of the following parts:
-
-
-
 Our repository includes 150 primary paragraphs. For each primary paragraph, there are three corresponding paragraphs representing neutrality, entailment, and contradiction, totaling 450 additional paragraphs.
