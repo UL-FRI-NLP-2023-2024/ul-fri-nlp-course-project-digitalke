@@ -1,0 +1,44 @@
+import xml.etree.ElementTree as ET
+import os
+
+def extract_paragraphs(xml_file, output_file):
+    """Extract text from <p> tags and append to a single file."""
+    ns = {'tei': 'http://www.tei-c.org/ns/1.0'}  # Namespace dictionary
+    try:
+        tree = ET.parse(xml_file)
+        root = tree.getroot()
+        # Extract all paragraph tags
+        paragraphs = root.findall('.//tei:text/tei:body/tei:p', namespaces=ns)
+
+        # Extract text from each paragraph and append to the output file
+        with open(output_file, 'a', encoding='utf-8') as file:
+            for para in paragraphs:
+                text = ' '.join(para.itertext()).strip().replace('\n', ' ')  # Combine all text within the paragraph and remove new lines
+                if text:  # Ensure there is text to write
+                    file.write(text + '\n\n')
+
+    except ET.ParseError as e:
+        print(f"Error parsing the XML in {xml_file}: {e}")
+
+def process_all_xml_files(directory_path, output_directory):
+    """Process sets of 3000 XML files and save extracted text to separate files."""
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+
+    xml_files = [f for f in os.listdir(directory_path) if f.endswith('.xml')]
+    total_files = 10000  # Total number of files to process, reduced from 9000 to 10000
+    files_per_set = 3000  # Number of files per output file
+
+    for i in range(0, total_files, files_per_set):
+        output_file = os.path.join(output_directory, f'combined_paragraphs_set_{i // files_per_set + 1}.txt')
+        open(output_file, 'w').close()  # Clear the file before writing
+        for xml_file_name in xml_files[i:i + files_per_set]:  # Process the next set of files
+            xml_file_path = os.path.join(directory_path, xml_file_name)
+            print(f"Processing {xml_file_path}")
+            extract_paragraphs(xml_file_path, output_file)
+        print(f"Extraction complete for set {i // files_per_set + 1}.")
+
+if __name__ == "__main__":
+    directory_path = r'C:\Users\katar\OneDrive - Univerza v Mariboru\faksLJ\Programiranje1\GigafidaV1_0'
+    output_directory = r'C:\Users\katar\OneDrive - Univerza v Mariboru\faksLJ\ProcessedTexts'  # Save output outside the Gigafida directory
+    process_all_xml_files(directory_path, output_directory)
