@@ -1,0 +1,51 @@
+import os
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
+from sklearn.metrics import pairwise_distances_argmin_min
+
+def preprocess_text(text, stop_words):
+    tokens = word_tokenize(text.lower())
+    filtered_tokens = [token for token in tokens if token.isalnum() and token not in stop_words]
+    return ' '.join(filtered_tokens)
+
+def load_texts(directory):
+    texts = []
+    for filename in os.listdir(directory):
+        if filename.endswith('.txt'):
+            with open(os.path.join(directory, filename), 'r', encoding='utf-8') as file:
+                texts.append(file.read())
+    return texts
+
+slovenian_stopwords = set(stopwords.words('slovene')) if 'slovene' in stopwords.fileids() else {}
+
+directory = r'C:\Users\katar\OneDrive - Univerza v Mariboru\faksLJ\ProcessedTexts'
+texts = load_texts(directory)
+processed_texts = [preprocess_text(text, slovenian_stopwords) for text in texts]
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(processed_texts)
+
+k = 4  # predpostavljeno število klasterjev
+model = KMeans(n_clusters=k, random_state=42)
+model.fit(X)
+
+centroids = model.cluster_centers_
+
+closest, _ = pairwise_distances_argmin_min(centroids, X)
+
+for i, index in enumerate(closest):
+    print(f"Center of Cluster {i}:")
+    print(texts[index][:500])  # Izpišemo prvih 500 znakov za pregled
+    print("\n---\n")
+
+output_folder = r'C:\Users\katar\OneDrive - Univerza v Mariboru\faksLJ\NLP\Izbrani_odlomki'
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+
+for i, index in enumerate(closest):
+    with open(os.path.join(output_folder, f'cluster_{i}_center.txt'), 'w', encoding='utf-8') as file:
+        file.write(texts[index])
+
