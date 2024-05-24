@@ -20,4 +20,10 @@ We then fed these prompts to ChatGPT-4 to create corresponding paragraphs.
 
 --- Structure ---
 
-Our repository includes 150 primary paragraphs. For each primary paragraph, there are three corresponding paragraphs representing neutrality, entailment, and contradiction, totaling 450 additional paragraphs.
+Our repository includes 150 primary paragraphs. For each primary paragraph, there are three corresponding paragraphs representing neutrality, entailment, and contradiction, totaling 450 additional paragraphs. These are saved directly in folder Paragraphs and also in the original Word file, which can be accessed through our repository.
+
+The entire dataset consists of the following parts:
+- "Paragraphs" - the whole dataset, including original extracted paragraphs, creative prompts and three paragraphs expressing neutrality, entailment and contradiction, for each of the original paragraph respectively.
+- "evaluation-ChatGPT.xlsx" - statistic analysis comparing the performance of ChatGPT-3.5 and ChatGPT-4 in recognizing the semantic relationship between paragraphs.
+- "report/code" - contains both codes used for preprocessing and K-means clustering.
+
