@@ -16,6 +16,9 @@ The files were seperated into three different sections, and then K-means cluster
 
 We then fed these prompts to ChatGPT-4 to create corresponding paragraphs.
 
+The created paragraphs were meticulously reviewed and annotated to ensure a clear relationship with the original text. Paragraph pairs were randomly selected and provided to both ChatGPT-3.5 and ChatGPT-4 to evaluate which model performs better in identifying the relationships between the paragraphs.
+
+A comprehensive statistical analysis was conducted to compare the performance of both models.
 
 
 --- Structure ---
