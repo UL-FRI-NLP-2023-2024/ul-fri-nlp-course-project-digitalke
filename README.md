@@ -26,7 +26,7 @@ A comprehensive statistical analysis was conducted to compare the performance of
 Our repository includes 150 primary paragraphs. For each primary paragraph, there are three corresponding paragraphs representing neutrality, entailment, and contradiction, totaling 450 additional paragraphs. These are saved directly in folder Paragraphs and also in the original Word file, which can be accessed through our repository.
 
 The entire dataset consists of the following parts:
-- "Paragraphs" - the whole dataset, including original extracted paragraphs, creative prompts and three paragraphs expressing neutrality, entailment and contradiction, for each of the original paragraph respectively.
+- "Paragraphs_and_prompts" - the whole dataset, including original extracted paragraphs, creative prompts and three paragraphs expressing neutrality, entailment and contradiction, for each of the original paragraph respectively.
 - "evaluation_of_ChatGPT_performance.xlsx" - statistic analysis comparing the performance of ChatGPT-3.5 and ChatGPT-4 in recognizing the semantic relationship between paragraphs.
 - "report/code" - contains both codes used for preprocessing and K-means clustering.
 - "Paragrafi_in_prompti.docx" - Word document with all of the paragraphs and creative prompts.
